@@ -1,9 +1,50 @@
+<?php
+    $k =10;
+?>
+
 <html>
-<head>
-	<title>code fight</title>
-	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-	<style>
-		body
+    <head>
+         <script>
+          var versuche;
+		var checked = false;
+			
+		window.onload = function()
+		{
+			versuche = 0;
+			document.getElementById("versuche_count").innerHTML = versuche;
+		}
+		function check()
+		{
+			var r = document.getElementById('input').value;
+				
+			if (checked == false)
+			{
+				if (r == '0')
+				{
+					checked = true;
+					document.getElementById("answer").innerHTML = "richtig";
+					versuche++;
+					document.getElementById("versuche_count").innerHTML = versuche;
+					document.getElementById('answer').style.backgroundColor="green";
+					document.getElementById('answer').style.display="block";
+					document.getElementById('codebox').style.backgroundColor="green";
+				}
+				else
+				{
+					document.getElementById("answer").innerHTML = "falsch";
+					versuche++;
+					document.getElementById("versuche_count").innerHTML = versuche;
+					document.getElementById('answer').style.backgroundColor="red";
+					document.getElementById('codebox').style.backgroundColor="red";
+					document.getElementById('answer').style.display="block";
+				}
+			}	
+		}
+		
+        </script>
+        <style>
+     
+           body
 		{
 			font-size:1.2em;
 			background-color: grey;
@@ -95,48 +136,123 @@
 			padding: 10px;
 			cursor: pointer;
 		}
-	</style>
-	<script>
-		var versuche;
-		var checked = false;
-			
-		window.onload = function()
-		{
-			versuche = 0;
-			document.getElementById("versuche_count").innerHTML = versuche;
-		}
-		function check()
-		{
-			var r = document.getElementById('input').value;
-				
-			if (checked == false)
-			{
-				if (r == '0')
-				{
-					checked = true;
-					document.getElementById("answer").innerHTML = "richtig";
-					versuche++;
-					document.getElementById("versuche_count").innerHTML = versuche;
-					document.getElementById('answer').style.backgroundColor="green";
-					document.getElementById('answer').style.display="block";
-					document.getElementById('codebox').style.backgroundColor="green";
-				}
-				else
-				{
-					document.getElementById("answer").innerHTML = "falsch";
-					versuche++;
-					document.getElementById("versuche_count").innerHTML = versuche;
-					document.getElementById('answer').style.backgroundColor="red";
-					document.getElementById('codebox').style.backgroundColor="red";
-					document.getElementById('answer').style.display="block";
-				}
-			}	
-		}
-		
-	</script>
+              <?php
+            
+            $n = $k;
+            
+            while($x<$n)
+            {
+              $x++;  
+              $timer1 = rand(9,65);
+              $timer2 = rand(5,45);
+              $timer3 = rand(2,35);
+              
+              $leftR = rand(1, 100);
+            ?>
+            .centrum<?php echo $x; ?> 
+            {
+            	height: 6px;
+            	left: <?php echo $leftR; ?>px;
+            	position: fixed;
+            	top: 5%;
+            	width: 1150px;
+            	animation: fly_horizontal <?php echo $timer1; ?>s ease-in-out 0s infinite;
+    
+            }
+            
+            .moveY<?php echo $x; ?> 
+            {
+            	height: 950px;
+            	position: fixed;
+            	top: <?php echo $leftR; ?>%;
+            	width: 150px;
+            	animation: rotate <?php echo $timer1; ?>s linear 0s infinite;
+          
+           }
+           
+            #bong<?php echo $x; ?> 
+            {
+            	bottom: 0px;
+            	position: fixed;
+                background-image: url("img/thomas.png");
+                background-repeat: no-repeat;
+                width: 120px;
+                height: 158px;
+                cursor: url("img/aim.png"), pointer;
+            
+            }
+                    <?php
+    }
+?>
+            #score
+            {
+                font-weight: bold;
+                font-size: 3em;
+                color: white;
+            	top: 0;
+            	right: 0;
+            	position: fixed;
+                background-color: green;
+                border:5px solid white;
+                border-radius: 20px;
+                width: 300px;
+                height: 100px;
+            }
+            
+               #title
+            {
+                 color: hsl(15,70%,70%); 
+                    text-shadow:
+                 0 1px 0 hsl(15,40%,60%),
+                 0 1px 0 hsl(15,40%,58%),
+                 0 3px 0 hsl(15,40%,56%),
+                 0 4px 0 hsl(15,40%,54%),
+                 0 5px 0 hsl(15,40%,52%),
+                 0 6px 1px hsl(15,40%,50%),
+                 0 0 5px hsl(15,20%,60%),
+                 0 1px 3px hsl(15,20%,58%),
+                 0 3px 5px hsl(15,20%,56%),
+                 0 5px 10px hsl(15,20%,54%),
+                 0 10px 10px hsl(15,20%,52%),
+                 0 15px 15px hsl(15,20%,50%);
+                font-weight: bold;
+                font-size: 3em;
+                color: white;
+            	top: 0;
+            	position: fixed;
+                width: 100%
+                height: 50px;
+                margin-left: auto;
+                margin-right: auto;
+                z-index: 9999;
+            }
+
+    @keyframes fly_horizontal 
+    {
+        0% { left: -100px;}
+        50%{ left : 50%;}
+        100%{ left: 100%;}
+    }
+    
+    @keyframes fly_vertical
+    {
+        0%   {bottom: 0;}
+        100% {bottom: 100%;}
+    }
+    
+    
+    @keyframes rotate 
+    {
+        100% {transform: rotate(360deg);}
+    }
+
+</style>
 </head>
-<body>
-	<div id="header">
+
+    <body>
+           <div class="main">
+         
+         <div id="header">
 		<h1>code fight</h1>
 		<div id="versuche">Versuche: <span id="versuche_count"></span></div>
 		<div id="answer"><span id="okok"></span></div>
@@ -178,5 +294,28 @@
 	<div id="footer">
 		<span id="mybutton" onclick="check()">CHECK</span>
 	</div>
-</body>
+         
+        
+    <?php
+    $i = 0;
+    $g = $k;
+    while($i<$g)
+    {
+      $i++;  
+?>
+ 
+        <div class="centrum<?php echo $i; ?>"> 
+            <span class="moveY<?php echo $i; ?>">
+                <span id="bong<?php echo $i; ?>" onclick="check(this.id)"></span>
+            </span>
+        </div>
+      
+        <?php
+    }
+?>
+
+    </div>
+    </body>
 </html>
+
+
